@@ -1,4 +1,4 @@
-# InterviewHub — Real-Time Interview & Collaboration Platform
+# InterviewHost — Real-Time Interview & Collaboration Platform
 
 A full-stack MERN application for scheduling and running live technical
 interviews: real-time collaborative code editor, chat, question bank,
@@ -13,7 +13,7 @@ JavaScript submissions.
 ## Project structure
 
 ```
-interviewhub/
+interviewHost/
 ├── server/        # Express + Socket.IO API
 │   └── src/
 │       ├── config/       # env validation, constants, DB connection
