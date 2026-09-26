@@ -2,21 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { getSocket } from '../services/socket.js';
 
-// Public STUN server — enough to discover a usable address on most home/office networks.
-// A strict corporate or mobile NAT may still fail to connect a direct peer-to-peer path;
-// add a TURN server here (e.g. a self-hosted coturn, or a paid TURN provider) if that
-// matters for your deployment. The server-side signaling relay (see
-// server/src/sockets/index.js) never sees or touches the actual audio/video either way.
+
 const ICE_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }];
 
 const idle = { status: 'idle', video: true, incoming: null, micOn: true, camOn: true };
 
-/**
- * Peer-to-peer audio/video calling for the interview room, signaled over the same Socket.IO
- * connection useInterviewRoom keeps alive (see the `call-*` events there and on the server).
- * Call state and media streams are kept out of Redux deliberately — MediaStream/
- * RTCPeerConnection objects aren't serializable and don't belong in a store.
- */
+
 export default function useCall() {
   const [call, setCall] = useState(idle);
   const [localStream, setLocalStream] = useState(null);
@@ -53,7 +44,7 @@ export default function useCall() {
     };
 
     pc.onconnectionstatechange = () => {
-      if (pcRef.current !== pc) return; // event from a connection we've already torn down
+      if (pcRef.current !== pc) return; 
       if (pc.connectionState === 'failed') {
         toast.error('The call connection failed — this can happen on some networks (VPN, strict NAT).');
         cleanup();
@@ -146,8 +137,7 @@ export default function useCall() {
     setCall((c) => ({ ...c, camOn: track.enabled }));
   }, []);
 
-  // Wire up the signaling listeners. Re-subscribes whenever call.status changes so the
-  // closures below (the busy check in particular) always see the current status.
+  
   useEffect(() => {
     const socket = getSocket();
     if (!socket) return;
