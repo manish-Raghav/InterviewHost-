@@ -5,7 +5,7 @@ export default function Logo({ light = false }) {
         <rect x="1" y="4" width="15" height="15" rx="4" fill="#0E7C7B" />
         <rect x="10" y="8" width="15" height="15" rx="4" fill={light ? '#ECEFF3' : '#16202F'} opacity="0.92" />
       </svg>
-      <span className={`font-display text-lg font-bold ${light ? 'text-white' : 'text-ink'}`}>InterviewHub</span>
+      <span className={`font-display text-lg font-bold ${light ? 'text-white' : 'text-ink'}`}>InterviewHost</span>
     </span>
   );
 }
